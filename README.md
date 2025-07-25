@@ -116,7 +116,7 @@ Bu proje MIT lisansı altında lisanslanmıştır.
 
 ## 📞 İletişim
 
-Proje ile ilgili sorularınız için issue açabilirsiniz.
+https://github.com/TuranTahire/InterMatch-Web.git
 
 ---
 
