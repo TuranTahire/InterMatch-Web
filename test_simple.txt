@@ -1,0 +1,3 @@
+Bu bir test dosyasıdır.
+Dosya yükleme testi için oluşturuldu.
+İçerik: Test metni

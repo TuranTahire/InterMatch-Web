@@ -1,0 +1,42 @@
+TAHİRE GÜLNUR TURANLI - UTF-8 TEST
+
+İLETİŞİM BİLGİLERİ
+Email: tahire.turanli@email.com
+Telefon: +90 555 123 4567
+Adres: İstanbul, Türkiye
+
+EĞİTİM
+İstanbul Teknik Üniversitesi - Bilgisayar Mühendisliği (2018-2022)
+GPA: 3.8/4.0
+
+DENEYİM
+Senior Frontend Developer - TechCorp (2022-Günümüz)
+• React.js ve TypeScript kullanarak kullanıcı arayüzleri geliştirdim
+• Redux ve Context API ile state management yaptım
+• Jest ve Cypress ile unit ve integration testleri yazdım
+• Agile metodolojileri kullanarak ekip çalışması yaptım
+
+Frontend Developer - StartupXYZ (2020-2022)
+• Vue.js ve JavaScript ile web uygulamaları geliştirdim
+• REST API'lar ile backend entegrasyonu yaptım
+• Git ve GitHub ile versiyon kontrolü yaptım
+
+BECERİLER
+Programlama Dilleri: JavaScript, TypeScript, HTML5, CSS3, Python
+Framework'ler: React.js, Vue.js, Node.js, Express.js
+Veritabanları: MongoDB, PostgreSQL, MySQL
+Araçlar: Git, Docker, Webpack, Jest, Cypress
+Diller: Türkçe (Ana dil), İngilizce (İleri seviye)
+
+PROJELER
+E-Ticaret Platformu - React.js ve Node.js ile geliştirilen tam kapsamlı e-ticaret sitesi
+Task Management App - Vue.js ile geliştirilen proje yönetim uygulaması
+Weather Dashboard - JavaScript ve API kullanarak geliştirilen hava durumu uygulaması
+
+SERTİFİKALAR
+AWS Certified Developer Associate
+Google Cloud Platform Fundamentals
+React Developer Certification
+
+HOBİLER
+Yeni teknolojiler öğrenmek, açık kaynak projelere katkıda bulunmak, seyahat etmek
