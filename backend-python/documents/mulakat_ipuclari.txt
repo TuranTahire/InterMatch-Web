@@ -1,0 +1,49 @@
+YAZILIM MÜHENDİSİ MÜLAKAT İPUÇLARI
+
+1. TEKNİK MÜLAKAT HAZIRLIĞI
+- Temel programlama kavramlarını tekrar edin
+- Veri yapıları ve algoritmaları gözden geçirin
+- Kod yazma pratiği yapın (LeetCode, HackerRank)
+- Sistem tasarımı konularını çalışın
+
+2. BEHAVIORAL SORULAR
+- STAR metodu kullanın: Situation, Task, Action, Result
+- Geçmiş projelerinizden örnekler hazırlayın
+- Takım çalışması deneyimlerinizi anlatın
+- Problem çözme süreçlerinizi açıklayın
+
+3. YAYGIN SORULAR
+- "Kendinizi tanıtın" - 2-3 dakikalık özet
+- "En büyük başarınız" - Sayısal verilerle destekleyin
+- "Zorlu bir durumla nasıl başa çıktınız"
+- "Neden bu şirketi seçtiniz"
+
+4. TEKNİK SORULAR
+- Kod yazma sorularına hazırlıklı olun
+- Düşünme sürecinizi sesli açıklayın
+- Optimizasyon önerileri sunun
+- Test senaryoları düşünün
+
+5. ŞİRKET ARAŞTIRMASI
+- Şirketin ürünlerini ve hizmetlerini öğrenin
+- Teknoloji stack'ini araştırın
+- Şirket kültürü ve değerlerini inceleyin
+- Güncel haberleri takip edin
+
+6. SORU HAZIRLAMA
+- Şirket hakkında sorular hazırlayın
+- Teknoloji ve projeler hakkında sorun
+- Kariyer gelişimi fırsatlarını öğrenin
+- Takım yapısı ve çalışma şeklini anlayın
+
+7. MÜLAKAT GÜNÜ
+- Erken gidin, rahat kıyafet giyin
+- Not defteri ve kalem götürün
+- Telefonunuzu kapatın
+- Göz teması kurun, aktif dinleyin
+
+8. TAKİP
+- Mülakat sonrası teşekkür e-postası gönderin
+- LinkedIn'de mülakatçıları ekleyin
+- Sonuç için sabırlı olun
+- Geri bildirim alırsanız öğrenin
