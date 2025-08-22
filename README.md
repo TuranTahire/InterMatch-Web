@@ -1,139 +1,113 @@
-# Intermatch Web - CV İş İlanı Eşleştirme Sistemi
+# 🚀 AI Agent Template - Full Stack
 
-## 📋 Proje Açıklaması
-AI destekli CV ve iş ilanı eşleştirme sistemi. Groq AI kullanarak akıllı analiz yapar.
+Bu template, **veritabanı gerektirmeyen** AI agent projeleri için hazırlanmış tam kapsamlı bir başlangıç kitidir.
 
-## 🏗️ Güncel Proje Yapısı
+## 📁 Proje Yapısı
 
 ```
-intermatch-web/
-├── frontend/                # 🎨 React Frontend
-│   ├── src/                # React kaynak kodları
-│   ├── public/             # Statik dosyalar
-│   ├── package.json        # Frontend bağımlılıkları
-│   └── node_modules/       # Frontend packages
-│
-├── backend-python/         # 🐍 Python Backend  
-│   ├── app.py             # Ana Flask server
-│   ├── utils.py           # Dosya işleme yardımcıları
-│   ├── agents/            # AI Agents
-│   │   ├── cv_analyzer_agent.py
-│   │   ├── interview_questions_agent.py
-│   │   ├── cv_improvement_agent.py
-│   │   └── rag_enhanced_agent.py
-│   ├── matching_engine.py # RAG destekli AI analizi
-│   ├── documents/         # RAG için belgeler
-│   ├── chroma_db/         # Vektör veritabanı
-│   ├── config.env         # Çevre değişkenleri
+ai-agent-template/
+├── backend-python/          # Flask AI Backend
+│   ├── agents/             # AI Agent'ları
+│   ├── documents/          # RAG için dokümanlar
+│   ├── app.py             # Ana Flask uygulaması
 │   └── requirements.txt   # Python bağımlılıkları
-│
-├── scripts/                # 🔧 Çalıştırma scriptleri
-└── README.md              # Bu dosya
+├── frontend/               # React Frontend
+│   ├── src/
+│   │   ├── components/    # UI Bileşenleri
+│   │   └── App.js        # Ana uygulama
+│   └── package.json      # Node.js bağımlılıkları
+└── scripts/               # Başlatma scriptleri
 ```
 
-## 🚀 Kurulum
+## 🚀 Hızlı Başlangıç
 
-### 1. Frontend Kurulumu
+### 1. Backend'i Başlat
 ```bash
-cd frontend
-npm install
-```
-
-### 2. Backend Kurulumu  
-```bash
-cd backend-python
-pip install flask flask-cors python-dotenv groq PyPDF2 python-docx
-pip install langchain langchain-groq chromadb pypdf sentence-transformers
-```
-
-### 3. Çevre Değişkenleri
-Backend klasöründe `config.env` dosyası oluşturun:
-```env
-GROQ_API_KEY=your_groq_api_key_here
-FLASK_ENV=development
-FLASK_DEBUG=True
-```
-
-## 🎯 Çalıştırma
-
-### Geliştirme Modu
-```bash
-# Backend (Port 5000)
 cd backend-python
 python app.py
+```
+Backend `http://localhost:5001` adresinde çalışacak.
 
-# Frontend (Port 3002) - Ayrı terminal
+### 2. Frontend'i Başlat
+```bash
 cd frontend
 npm start
 ```
+Frontend `http://localhost:3003` adresinde çalışacak.
 
-## 🔧 Teknolojiler
-
-### Frontend
-- **React** 18.3.1
-- **Tailwind CSS** 
-- **Axios** (HTTP istekleri)
-- **Modern UI/UX**
-
-### Backend
-- **Flask** - Python web framework
-- **Groq AI** - Hızlı LLM servisi
-- **LangChain** - AI framework
-- **ChromaDB** - Vektör veritabanı
-- **RAG (Retrieval-Augmented Generation)** - Gelişmiş AI analizi
-
-## 📱 Özellikler
-
-- ✅ CV ve İş İlanı Yükleme (PDF/DOCX)
-- ✅ AI Destekli Uyumluluk Analizi
-- ✅ RAG Destekli Uzman Analizi
-- ✅ Mülakat Soruları Üretimi
-- ✅ CV İyileştirme Önerileri
-- ✅ Detaylı Skor Hesaplama
-- ✅ Türkçe Dil Desteği
-- ✅ Modern ve Responsive UI
-
-## 🔄 API Endpoints
-
-- `GET /` - Ana sayfa
-- `GET /api/health` - Server durumu  
-- `POST /analyze` - CV-İş ilanı analizi
-- `POST /generate-questions` - Mülakat soruları
-- `POST /get-suggestions` - CV iyileştirme önerileri
-
-## 🚀 Çalıştırma
-
-### Manuel Başlatma
+### 3. Tek Komutla Başlat
 ```bash
-# Backend
-cd backend-python
-python app.py
+# Windows
+start-services.bat
 
-# Frontend (ayrı terminal)
-cd frontend
-npm start
+# Veya manuel olarak
+npm start  # frontend klasöründe
+python app.py  # backend-python klasöründe
 ```
 
-### Erişim
-- **Frontend:** http://localhost:3002
-- **Backend:** http://localhost:5000
+## 🛠️ Özellikler
 
-## 🧠 AI Özellikleri
+### Backend (Flask + AI Agents)
+- ✅ **CORS Hazır**: Frontend ile otomatik iletişim
+- ✅ **AI Agents**: Groq, RAG, CV Analizi
+- ✅ **File Upload**: PDF/DOCX dosya yükleme
+- ✅ **Error Handling**: Kapsamlı hata yönetimi
+- ✅ **Hot Reload**: Geliştirme modunda otomatik yenileme
 
-### RAG Sistemi
-- Uzman bilgi tabanı
-- Vektör veritabanı
-- Gelişmiş analiz
+### Frontend (React + Tailwind)
+- ✅ **Modern UI**: Dashboard tarzı tasarım
+- ✅ **Responsive**: Tüm cihazlarda uyumlu
+- ✅ **File Upload**: Drag & Drop dosya yükleme
+- ✅ **Real-time**: Backend ile canlı iletişim
+- ✅ **Error Handling**: Kullanıcı dostu hata mesajları
 
-### AI Agents
-- CV Analiz Agent
-- Mülakat Soruları Agent
-- CV İyileştirme Agent
+## 🔧 Özelleştirme
 
-## 👥 Geliştirici Notları
+### Yeni AI Agent Ekleme
+1. `backend-python/agents/` klasörüne yeni agent dosyası ekle
+2. `app.py`'de agent'ı import et ve endpoint ekle
+3. Frontend'de yeni API çağrısı ekle
 
-Bu proje Groq AI ile çalışan, RAG destekli modern bir CV analiz sistemidir.
-Temiz kod yapısı ve modüler tasarım ile geliştirilmiştir.
+### UI Değişiklikleri
+1. `frontend/src/App.js` dosyasını düzenle
+2. Tailwind CSS ile stil ver
+3. Hot reload ile anında görüntüle
+
+## 📝 API Endpoints
+
+- `POST /analyze` - CV analizi
+- `GET /health` - Sağlık kontrolü
+
+## 🎨 Template Özellikleri
+
+### Veritabanı Yok!
+- ✅ **Stateless**: Her istek bağımsız
+- ✅ **Hızlı**: Veritabanı bağlantısı yok
+- ✅ **Basit**: Kurulum gerektirmez
+- ✅ **Taşınabilir**: Her yerde çalışır
+
+### Hazır Bileşenler
+- 📊 **Dashboard Layout**: Modern panel tasarımı
+- 🎯 **File Upload**: Sürükle-bırak dosya yükleme
+- 📈 **Progress Indicators**: Yükleme göstergeleri
+- 🎨 **Responsive Cards**: Uyumlu kart tasarımları
+
+## 🚀 Yeni Proje Oluşturma
+
+1. Bu template'i klonla
+2. API anahtarlarını güncelle
+3. Agent'ları özelleştir
+4. UI'yi değiştir
+5. Çalıştır!
+
+## 📞 Destek
+
+Herhangi bir sorun yaşarsanız:
+1. Backend loglarını kontrol edin
+2. Frontend console'u kontrol edin
+3. Port çakışması olup olmadığını kontrol edin
 
 ---
-*Intermatch Web © 2025*
+
+**Template Versiyonu**: 1.0  
+**Son Güncelleme**: 2024

@@ -104,12 +104,34 @@ def extract_skills(text):
     Returns:
         Beceri listesi
     """
-    # Basit beceri çıkarma (gerçek uygulamada daha gelişmiş NLP kullanılabilir)
+    # Genişletilmiş beceri listesi
     common_skills = [
-        'python', 'java', 'javascript', 'react', 'node.js', 'sql', 'mongodb',
-        'docker', 'kubernetes', 'aws', 'azure', 'git', 'agile', 'scrum',
-        'machine learning', 'ai', 'data science', 'analytics', 'project management',
-        'leadership', 'communication', 'teamwork', 'problem solving', 'analytical thinking'
+        # Programming Languages
+        'python', 'java', 'javascript', 'typescript', 'c++', 'c#', 'php', 'ruby', 'go', 'rust', 'swift', 'kotlin', 'scala',
+        
+        # Web Technologies
+        'html', 'css', 'react', 'vue', 'angular', 'node.js', 'express', 'django', 'flask', 'spring', 'laravel', 'next.js', 'nuxt.js',
+        
+        # Databases
+        'sql', 'mysql', 'postgresql', 'mongodb', 'redis', 'elasticsearch', 'oracle', 'sqlite', 'mariadb',
+        
+        # Cloud & DevOps
+        'docker', 'kubernetes', 'aws', 'azure', 'gcp', 'terraform', 'jenkins', 'gitlab', 'github', 'git', 'ci/cd',
+        
+        # Data & AI
+        'machine learning', 'ml', 'ai', 'artificial intelligence', 'data science', 'analytics', 'pandas', 'numpy', 'tensorflow', 'pytorch', 'scikit-learn',
+        
+        # Mobile
+        'react native', 'flutter', 'ios', 'android', 'mobile development',
+        
+        # Other Technologies
+        'graphql', 'rest api', 'microservices', 'serverless', 'blockchain', 'cybersecurity', 'linux', 'unix',
+        
+        # Soft Skills
+        'leadership', 'communication', 'teamwork', 'problem solving', 'analytical thinking', 'project management', 'agile', 'scrum', 'kanban', 'lean',
+        
+        # Business Skills
+        'strategy', 'planning', 'budgeting', 'marketing', 'sales', 'customer service', 'negotiation', 'presentation'
     ]
     
     text_lower = text.lower()
@@ -117,7 +139,10 @@ def extract_skills(text):
     
     for skill in common_skills:
         if skill in text_lower:
-            found_skills.append(skill)
+            found_skills.append(skill.title())  # İlk harfi büyük yap
+    
+    # Debug için log
+    print(f"🔍 Extracted skills from text: {found_skills}")
     
     return found_skills
 
@@ -228,7 +253,7 @@ def calculate_final_score(cv_text, job_text, rag_context=""):
             "error": str(e)
         }
 
-def get_rag_analysis(cv_text, job_text):
+def get_rag_analysis(cv_text, job_text, language='Türkçe'):
     """
     RAG destekli uzman analizi yapar
     Uzmanın beynindeki bilgileri kullanarak CV ve iş ilanı analizi yapar
@@ -251,35 +276,43 @@ def get_rag_analysis(cv_text, job_text):
 
         # 3. Uzmana sorulacak soruyu hazırla (notları da ekleyerek)
         enhanced_prompt = f"""
-        Sen bir uzman kariyer danışmanısın. Cevaplarını SANA VERİLEN UZMAN NOTLARI'na dayandırarak oluştur.
+ÖNEMLİ: SEN SADECE {language} DİLİNDE CEVAP VERİRSİN!
+ASLA BAŞKA DİL KULLANMA!
+{language} DİLİNDE YAZ!
+TÜM CEVABINI {language} DİLİNDE VER!
 
-        ---
-        UZMAN NOTLARI:
-        {context}
-        ---
+Sen bir uzman kariyer danışmanısın. Cevaplarını SANA VERİLEN UZMAN NOTLARI'na dayandırarak oluştur.
 
-        GÖREV: Yukarıdaki uzman notları ışığında, aşağıdaki CV ve iş ilanını detaylıca analiz et.
+---
+UZMAN NOTLARI:
+{context}
+---
 
-        CV METNİ:
-        {cv_text}
+GÖREV: Yukarıdaki uzman notları ışığında, aşağıdaki CV ve iş ilanını detaylıca analiz et.
 
-        İŞ İLANI METNİ:
-        {job_text}
+CV METNİ:
+{cv_text}
 
-        Analizini şu formatta, başlıkları kullanarak ve Türkçe olarak sunmalısın:
+İŞ İLANI METNİ:
+{job_text}
 
-        **Uyum Skoru:** [CV'nin ilana ne kadar uygun olduğunu 100 üzerinden bir yüzde olarak belirt]
+Analizini şu formatta, başlıkları kullanarak ve {language} olarak sunmalısın:
 
-        **Özet Değerlendirme:** [Adayın bu pozisyon için neden uygun veya uygun olmadığını 2-3 cümlelik kısa bir paragrafta açıkla]
+**Uyum Skoru:** [CV'nin ilana ne kadar uygun olduğunu 100 üzerinden bir yüzde olarak belirt]
 
-        **Eşleşen Anahtar Kelimeler ve Yetenekler:** [CV'de bulunan ve ilanda da istenen en önemli 3-5 yetenek veya anahtar kelimeyi madde madde listele]
+**Özet Değerlendirme:** [Adayın bu pozisyon için neden uygun veya uygun olmadığını 2-3 cümlelik kısa bir paragrafta açıkla]
 
-        **Eksik veya Geliştirilmesi Gereken Yönler:** [İlanda aranan ancak CV'de belirgin olmayan veya eksik olan 2-3 önemli noktayı madde madde belirt]
+**Eşleşen Anahtar Kelimeler ve Yetenekler:** [CV'de bulunan ve ilanda da istenen en önemli 3-5 yetenek veya anahtar kelimeyi madde madde listele]
 
-        **Uzman Tavsiyeleri:** [Yukarıdaki uzman notlarına dayanarak, adaya özel tavsiyeler ver]
+**Eksik veya Geliştirilmesi Gereken Yönler:** [İlanda aranan ancak CV'de belirgin olmayan veya eksik olan 2-3 önemli noktayı madde madde belirt]
 
-        **CV İyileştirme Önerileri:** [Uzman notlarına göre CV'yi nasıl iyileştirebileceğini belirt]
-        """
+**Uzman Tavsiyeleri:** [Yukarıdaki uzman notlarına dayanarak, adaya özel tavsiyeler ver]
+
+**CV İyileştirme Önerileri:** [Uzman notlarına göre CV'yi nasıl iyileştirebileceğini belirt]
+
+TEKRAR: SADECE {language} DİLİNDE CEVAP VER!
+ASLA İNGİLİZCE VEYA BAŞKA DİL KULLANMA!
+"""
 
         # 4. Skor hesaplama
         print("🎯 Skor hesaplama başlatılıyor...")

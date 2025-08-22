@@ -19,7 +19,7 @@ class InterviewQuestionsAgent:
             raise ValueError("GROQ_API_KEY bulunamadı!")
         
         self.client = Groq(api_key=self.api_key)
-        self.model = "llama3-8b-8192"
+        self.model = "llama3-70b-8192"
     
     def generate_questions(self, cv_text: str, job_text: str) -> str:
         """
@@ -36,25 +36,54 @@ class InterviewQuestionsAgent:
         
         try:
             prompt = f"""
-            Sen deneyimli bir işe alım uzmanısın. Verilen CV ve iş ilanına göre aday için özel mülakat soruları hazırla.
-            
-            Soruları şu kategorilerde organize et:
-            1. **Teknik Sorular** (CV'deki becerilerle ilgili)
-            2. **Deneyim Soruları** (Geçmiş iş deneyimleriyle ilgili)
-            3. **Davranışsal Sorular** (Problem çözme, takım çalışması vb.)
-            4. **Pozisyon Özel Soruları** (İş ilanındaki gereksinimlere göre)
-            
-            Her kategori için 3-5 soru hazırla. Sorular spesifik ve adayın CV'sine özel olsun.
-            
-            CV METNİ: {cv_text}
-            İŞ İLANI METNİ: {job_text}
-            """
+Sen bir mülakat uzmanısın. Aşağıdaki CV ve iş ilanına göre 5 adet mülakat sorusu ve cevabı hazırla.
+
+CV METNİ:
+{cv_text}
+
+İŞ İLANI METNİ:
+{job_text}
+
+GÖREV: 5 adet mülakat sorusu ve her soru için kısa cevap hazırla. Her seferinde farklı ve yaratıcı sorular üret:
+
+🎯 MÜLAKAT SORULARI VE CEVAPLARI
+
+1️⃣ [Teknik Soru]
+   Soru: [CV ve iş ilanına uygun teknik soru - her seferinde farklı olsun]
+   Cevap: [Kısa ve net cevap]
+
+2️⃣ [Deneyim Sorusu]
+   Soru: [Geçmiş deneyimlerle ilgili soru - spesifik projeler hakkında]
+   Cevap: [Kısa ve net cevap]
+
+3️⃣ [Davranışsal Soru]
+   Soru: [Durum ve davranış odaklı soru - zorluklar ve çözümler]
+   Cevap: [Kısa ve net cevap]
+
+4️⃣ [Motivasyon Sorusu]
+   Soru: [Kariyer hedefleri ve motivasyon soru - gelecek planları]
+   Cevap: [Kısa ve net cevap]
+
+5️⃣ [Şirket Uyumu Sorusu]
+   Soru: [Şirket kültürü ve uyum soru - değerler ve kültür]
+   Cevap: [Kısa ve net cevap]
+
+ÖNEMLİ KURALLAR:
+- Her seferinde tamamen farklı sorular üret
+- Her soru CV ve iş ilanına uygun olsun
+- Cevaplar kısa ve pratik olsun
+- Türkçe dilinde yaz
+- Emoji kullanarak görsel çekicilik kat
+- Markdown formatı kullanma, sadece düz metin yaz
+- Yaratıcı ve çeşitli sorular sor"""
             
             print("✅ Prompt oluşturuldu, API'ye istek gönderiliyor...")
             
             response = self.client.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],
                 model=self.model,
+                temperature=0.9,
+                max_tokens=1200
             )
             
             print("✅ Mülakat soruları oluşturuldu!")

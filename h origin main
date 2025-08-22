@@ -1,5 +1,0 @@
-[33m0545ce5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Initial commit: CareerMatch AI - CV İş İlanı Eşleştirme Sistemi
-[33m10e16a5[m Çalışan son stabil versiyon - Backend agent server ve frontend client entegrasyonu
-[33mba393e0[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m  README.md
-[33m338a540[m Remove .env file, API key is in code
-[33mfd90711[m Initial commit: InterMatch AI job analysis platform

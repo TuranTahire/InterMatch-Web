@@ -83,31 +83,90 @@ class RAGEnhancedAgent:
             # Hata durumunda eski yöntemi kullan
             return self._load_documents()
     
-    def analyze_with_rag(self, cv_text: str, job_text: str) -> str:
+    def analyze_with_rag(self, cv_text: str, job_text: str, company_name: str = None, language: str = 'Türkçe') -> str:
         """RAG destekli CV analizi yapar"""
         try:
             # ChromaDB'den en alakalı belgeleri getir
             knowledge_base = self.retrieve_context(job_text, k=5)
             
-            # Geliştirilmiş prompt oluştur
-            enhanced_prompt = f"""
-Sen bir uzman kariyer danışmanısın. CV ve iş ilanı analizi yapmalısın.
+            # Çok güçlü dil direktifi
+            if company_name:
+                enhanced_prompt = f"""
+Sen bir uzman CV analisti ve kariyer danışmanısın. Aşağıdaki uzman bilgilerini kullanarak detaylı analiz yap.
 
-**CV METNİ:**
+--- UZMAN BİLGİLERİ ---
+{knowledge_base}
+
+--- GÖREV ---
+Yukarıdaki uzman bilgilerini kullanarak, aşağıdaki CV ve iş ilanını detaylıca analiz et.
+
+CV METNİ:
 {cv_text}
 
-**İŞ İLANI METNİ:**
+İŞ İLANI METNİ:
 {job_text}
 
-SADECE aşağıdaki 3 bölümü içeren bir analiz yap. Başka hiçbir bölüm ekleme:
+ŞİRKET ADI: {company_name}
 
-**Uyum Skoru:** [CV'nin ilana ne kadar uygun olduğunu 100 üzerinden bir yüzde olarak belirt]
+GÖREV: Bu CV'nin iş ilanına ne kadar uygun olduğunu analiz et ve şu formatta cevap ver:
 
-**Özet Değerlendirme:** [Adayın bu pozisyon için neden uygun veya uygun olmadığını 2-3 cümlelik kısa bir paragrafta açıkla]
+**ÖZET DEĞERLENDİRME:**
+[CV'nin bu pozisyon için neden uygun veya uygun olmadığını 2-3 cümlelik kısa bir paragrafta açıkla. Spesifik nedenler belirt.]
 
-**Eşleşen Anahtar Kelimeler ve Yetenekler:** [CV'de bulunan ve ilanda da istenen en önemli 3-5 yetenek veya anahtar kelimeyi madde madde listele]
+**EŞLEŞEN YETENEKLER:**
+[CV'de bulunan ve iş ilanında da istenen en önemli 3-5 teknik yetenek veya beceriyi madde madde listele. Örnek: "React.js ile modern web uygulamaları geliştirme deneyimi", "MongoDB ve PostgreSQL veritabanı yönetimi"]
 
-ÖNEMLİ: "Eksik veya Geliştirilmesi Gereken Yönler", "Uzman Tavsiyeleri", "CV İyileştirme Önerileri" gibi bölümler EKLEME. Sadece yukarıdaki 3 bölümü içer.
+**EKSİK VEYA GELİŞTİRİLMESİ GEREKEN YÖNLER:**
+[İş ilanında aranan ancak CV'de belirgin olmayan veya eksik olan 2-3 önemli noktayı madde madde belirt. Örnek: "AWS cloud servisleri deneyimi eksik", "Takım liderliği deneyimi yetersiz"]
+
+**ÖNERİLER:**
+[Bu pozisyon için CV'yi nasıl iyileştirebileceğine dair 2-3 pratik öneri ver. Örnek: "Projelerinizde kullanılan teknolojileri daha detaylı açıklayın", "Liderlik deneyimlerinizi vurgulayın"]
+
+ÖNEMLİ KURALLAR:
+- Sadece {language} dilinde cevap ver
+- Her bölümde spesifik ve somut örnekler kullan
+- Genel ifadeler yerine detaylı açıklamalar yap
+- CV'deki gerçek içeriğe dayalı analiz yap
+- İş ilanındaki gereksinimlere odaklan
+- Uzman bilgilerini kullanarak daha derin analiz yap
+"""
+            else:
+                enhanced_prompt = f"""
+Sen bir uzman CV analisti ve kariyer danışmanısın. Aşağıdaki uzman bilgilerini kullanarak detaylı analiz yap.
+
+--- UZMAN BİLGİLERİ ---
+{knowledge_base}
+
+--- GÖREV ---
+Yukarıdaki uzman bilgilerini kullanarak, aşağıdaki CV ve iş ilanını detaylıca analiz et.
+
+CV METNİ:
+{cv_text}
+
+İŞ İLANI METNİ:
+{job_text}
+
+GÖREV: Bu CV'nin iş ilanına ne kadar uygun olduğunu analiz et ve şu formatta cevap ver:
+
+**ÖZET DEĞERLENDİRME:**
+[CV'nin bu pozisyon için neden uygun veya uygun olmadığını 2-3 cümlelik kısa bir paragrafta açıkla. Spesifik nedenler belirt.]
+
+**EŞLEŞEN YETENEKLER:**
+[CV'de bulunan ve iş ilanında da istenen en önemli 3-5 teknik yetenek veya beceriyi madde madde listele. Örnek: "React.js ile modern web uygulamaları geliştirme deneyimi", "MongoDB ve PostgreSQL veritabanı yönetimi"]
+
+**EKSİK VEYA GELİŞTİRİLMESİ GEREKEN YÖNLER:**
+[İş ilanında aranan ancak CV'de belirgin olmayan veya eksik olan 2-3 önemli noktayı madde madde belirt. Örnek: "AWS cloud servisleri deneyimi eksik", "Takım liderliği deneyimi yetersiz"]
+
+**ÖNERİLER:**
+[Bu pozisyon için CV'yi nasıl iyileştirebileceğine dair 2-3 pratik öneri ver. Örnek: "Projelerinizde kullanılan teknolojileri daha detaylı açıklayın", "Liderlik deneyimlerinizi vurgulayın"]
+
+ÖNEMLİ KURALLAR:
+- Sadece {language} dilinde cevap ver
+- Her bölümde spesifik ve somut örnekler kullan
+- Genel ifadeler yerine detaylı açıklamalar yap
+- CV'deki gerçek içeriğe dayalı analiz yap
+- İş ilanındaki gereksinimlere odaklan
+- Uzman bilgilerini kullanarak daha derin analiz yap
 """
 
             # Groq API'ye istek gönder
@@ -121,6 +180,7 @@ SADECE aşağıdaki 3 bölümü içeren bir analiz yap. Başka hiçbir bölüm e
                 model=self.model,
             )
             
+            # Gerçek analizi döndür
             return chat_completion.choices[0].message.content
             
         except Exception as e:
@@ -134,7 +194,10 @@ SADECE aşağıdaki 3 bölümü içeren bir analiz yap. Başka hiçbir bölüm e
             knowledge_base = self.retrieve_context(f"mülakat soruları {job_text}", k=3)
             
             enhanced_prompt = f"""
-Sen bir uzman mülakatçısın. Aşağıdaki uzman bilgilerini kullanarak mülakat soruları üretmelisin.
+ÖNEMLİ: SEN SADECE TÜRKÇE DİLİNDE CEVAP VERİRSİN!
+ASLA BAŞKA DİL KULLANMA!
+TÜRKÇE DİLİNDE YAZ!
+TÜM CEVABINI TÜRKÇE DİLİNDE VER!
 
 --- UZMAN BİLGİLERİ ---
 {knowledge_base}
@@ -153,7 +216,7 @@ Aşağıdaki kategorilerde sorular üret:
 **Teknik Sorular (3-5 soru):**
 [Pozisyonla ilgili teknik bilgi ve becerileri test eden sorular]
 
-**Behavioral Sorular (3-5 soru):**
+**Davranışsal Sorular (3-5 soru):**
 [Geçmiş deneyimleri ve davranışları test eden sorular]
 
 **Durumsal Sorular (2-3 soru):**
@@ -161,6 +224,8 @@ Aşağıdaki kategorilerde sorular üret:
 
 **Uzman İpuçları:**
 [Yukarıdaki uzman bilgilerine dayanarak, mülakat için özel ipuçları]
+
+TEKRAR: SADECE TÜRKÇE DİLİNDE CEVAP VER!
 """
 
             chat_completion = self.client.chat.completions.create(
@@ -186,7 +251,9 @@ Aşağıdaki kategorilerde sorular üret:
             knowledge_base = self.retrieve_context(f"CV yazma ipuçları {job_text}", k=3)
             
             enhanced_prompt = f"""
-Sen bir uzman CV danışmanısın. Aşağıdaki uzman bilgilerini kullanarak CV iyileştirme önerileri üretmelisin.
+SEN SADECE TÜRKÇE DİLİNDE CEVAP VERİRSİN!
+ASLA BAŞKA DİL KULLANMA!
+TÜRKÇE DİLİNDE YAZ!
 
 --- UZMAN BİLGİLERİ ---
 {knowledge_base}
@@ -219,6 +286,8 @@ Aşağıdaki kategorilerde öneriler üret:
 
 **Uzman Tavsiyeleri:**
 [Yukarıdaki uzman bilgilerine dayanarak özel tavsiyeler]
+
+TEKRAR: SADECE TÜRKÇE DİLİNDE CEVAP VER!
 """
 
             chat_completion = self.client.chat.completions.create(
